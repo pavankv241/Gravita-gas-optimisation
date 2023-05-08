@@ -1,0 +1,1073 @@
+Gas Optimization :-
+
+1 . ++i costs less gas than i++, especially when it's used in for-loops (--i/i-- too)
+
+Saves 5 gas per loop
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L182
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L211
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManagerOperations.sol#L456
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManagerOperations.sol#L617
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L126
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L84
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L165
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L777
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L785
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L820
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L839
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L882
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L907
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L911
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L948
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L453
+
+
+
+2. Use require statement instead of assert in external function :-
+
+Assert sholud used in internal works not in external works
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L150
+
+3. Use named returns for local variables where it is possible to save gas :-
+
+Saves deployment gas .
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L96
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L264
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L296
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L316
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L161
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L173
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L180
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L192
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L338
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L744
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L221
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L443
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L476
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L710
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L733
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L754
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L771
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L259
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L311
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L349
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L380
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L421
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L391
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L630
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L667
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L706
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/Timelock.sol#L113
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L565
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L647
+
+
+
+
+
+
+
+4 . Gas savings can be achieved by changing the model for assigning value to the structure
+By changing the pattern of assigning value to the structure, gas savings of ``~130`` per instance are achieved. In addition, this use will provide significant savings in distribution costs.
+
+
+OLD :-
+ContractsCache memory contractsCache = ContractsCache({
+			adminContract: adminContract,
+			vesselManager: vesselManager,
+			activePool: adminContract.activePool(),
+			debtToken: debtToken
+		});
+		
+		
+ struct can be update like below will save gas .NEW :-
+ 			contractsCache.adminContract = adminContract;
+			contractsCache.vesselManager = vesselManager;
+			contractsCache.activePool = adminContract.activePool();
+			contractsCache.debtToken = debtToken ;
+
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L120-L124
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L282-L287
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L94-L97
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L224-L228
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L341-L346
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L781-L784
+
+
+
+5. Using storage instead of memory for structs/arrays saves gas
+When fetching data from a storage location, assigning the data to a memory variable causes all fields of the struct/array to be read from storage, which incurs a Gcoldsload (2100 gas) for each field of the struct/array. If the fields are read from the new memory variable, they incur an additional MLOAD rather than a cheap stack read. Instead of declaring the variable with the memory keyword, declaring the variable with the storage keyword and caching any fields that need to be re-read in stack variables, will be much cheaper, only incuring the Gcoldsload for the fields actually read. The only time it makes sense to read the whole struct/array into a memory variable, is if the full struct/array is being returned by the function, is being passed to a function that requires memory, or if the array/struct is being read from another memory array/struct.
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L222
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L70
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L136
+
+
+6.No required of assert() :-
+hasPendingRewards() function have isVesselActive() function in line [523](https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L523)
+
+
+code snippet :-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/VesselManager.sol#L523
+
+
+
+
+7.Functions guaranteed to revert when called by normal users can be marked payable*
+
+If a function modifier such as onlyOwner is used, the function will revert if a normal user tries to pay the function. Marking the function as payable will lower the gas cost for legitimate callers because the compiler will not include checks for whether a payment was provided. The extra opcodes avoided are CALLVALUE(2),DUP1(3),ISZERO(3),PUSH2(3),JUMPI(10),PUSH1(3),DUP1(3),REVERT(0),JUMPDEST(1),POP(2).
+                                                                                                                            
+Saves 21 gas per call
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L120
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L135
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L67
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L58
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L166
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L41
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L59
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L68
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L92
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L225
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/AdminContract.sol#L263
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/Timelock.sol#L113
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/Timelock.sol#L134
+
+
+
+
+8. Short require strings save gas
+Strings in solidity are handled in 32 byte chunks. A require string longer than 32 bytes uses more gas. Shortening these strings will save gas. More than 32 chunks can consumes more memory slots and gas .
+Try to use custom error 
+Ref :-
+https://docs.soliditylang.org/en/v0.8.19/control-structures.html#revert
+
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L71
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L63
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L337
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L556
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L560
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L570
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L580
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L593
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L648
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L653
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L657
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L663
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L670
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L681
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L696
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L686
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/CollSurplusPool.sol#L74
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/CollSurplusPool.sol#L93
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/CollSurplusPool.sol#L99
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L142
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L48
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L153
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L157
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L165
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L170
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L192
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L108
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L110
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L112
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L165
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L457
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L463
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L221
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L219
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L468
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L921
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L925
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L929
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L945
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L954
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L958
+
+
+
+
+9 . X = X  + y/ X = X - Y is cheaper than x+=y\x-=y for storage varibles only .
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L74
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/CommunityIssuance.sol#L92
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L46
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/LockedGRVT.sol#L86
+
+
+
+
+
+10 . Use != instead of > for checking zero in require statement :-
+Saves :- 3
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L143
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/GRVT/GRVTStaking.sol#L76
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L152
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/BorrowerOperations.sol#L593
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/CollSurplusPool.sol#L74
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L121
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L193
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L112
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/SortedVessels.sol#L221
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L954
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/StabilityPool.sol#L958
+
+
+
+
+11 . Constructor can declare as payable :-
+If constructor declare as payable it prevents Opcode which were used to check "msg.value == 0" and saves 130 gas.
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L41
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/Timelock.sol#L72
+
+12.split the require statement which saves gas :-
+&& AND Opcode consumes 3 gas
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L141
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L145
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/DebtToken.sol#L146
+
+13 Use ternery operation instead of if() statements to save gas :-
+
+code snippet:-
+https://github.com/Gravita-Protocol/Gravita-SmartContracts/blob/main/contracts/FeeCollector.sol#L127-L133
+
+
+
+
+
+
+
+
+This is before Optimisation .
+
+·------------------------------------------------------------------------|---------------------------|-------------|-----------------------------·
+|                          Solc version: 0.8.19                          ·  Optimizer enabled: true  ·  Runs: 200  ·  Block limit: 30000000 gas  │
+·········································································|···························|·············|······························
+|  Methods                                                                                                                                       │
+·······························|·········································|·············|·············|·············|···············|··············
+|  Contract                    ·  Method                                 ·  Min        ·  Max        ·  Avg        ·  # calls      ·  usd (avg)  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  decreaseDebt                           ·          -  ·          -  ·      25956  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  increaseDebt                           ·          -  ·          -  ·      47881  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  setAddresses                           ·     227391  ·     227427  ·     227420  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  addNewCollateral                       ·     328887  ·     337359  ·     331718  ·          375  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setActive                              ·      46211  ·      46451  ·      46370  ·          375  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setAddresses                           ·     184335  ·     204511  ·     201119  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setBorrowingFee                        ·      28154  ·      50078  ·      31510  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setCCR                                 ·      30129  ·      32929  ·      31996  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setCollateralParameters                ·      57633  ·      66297  ·      63409  ·          306  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMCR                                 ·      30173  ·      32973  ·      32040  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMinNetDebt                          ·      28069  ·      50053  ·      36092  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMintCap                             ·      27753  ·      30841  ·      29297  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setPercentDivisor                      ·      29993  ·      32793  ·      31860  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setRedemptionBlockTimestamp            ·          -  ·          -  ·      47822  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setRedemptionFeeFloor                  ·      30142  ·      32954  ·      32013  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  addColl                                ·     242151  ·     371423  ·     324522  ·           16  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  adjustVessel                           ·          -  ·          -  ·     320461  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  claimCollateral                        ·      49860  ·      57537  ·      53153  ·           28  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  closeVessel                            ·     252927  ·     269947  ·     263152  ·           10  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  openVessel                             ·     419189  ·     730386  ·     594567  ·         1062  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  repayDebtTokens                        ·     389649  ·     391314  ·     390482  ·            4  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  setAddresses                           ·     250077  ·     250113  ·     250104  ·           94  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  withdrawColl                           ·     232522  ·     367084  ·     333814  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  withdrawDebtTokens                     ·     271816  ·     417598  ·     355383  ·            6  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  addColl                                ·     210081  ·     344364  ·     251872  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  adjustVessel                           ·     223670  ·     391500  ·     317886  ·           27  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  closeVessel                            ·     252927  ·     318175  ·     268544  ·           14  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  openVessel                             ·     419211  ·     743363  ·     615813  ·          435  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  repayDebtTokens                        ·     213396  ·     284883  ·     262677  ·            8  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  setAddresses                           ·     250087  ·     250135  ·     250124  ·           31  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  withdrawColl                           ·     233676  ·     367062  ·     267188  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  withdrawDebtTokens                     ·     278701  ·     391610  ·     332793  ·           12  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CollSurplusPool             ·  setAddresses                           ·     159737  ·     159773  ·     159769  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  addFundToStabilityPool                 ·      52422  ·     106639  ·     105199  ·          113  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  removeFundFromStabilityPool            ·      40354  ·      49954  ·      45154  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  setAddresses                           ·     137235  ·     137259  ·     137255  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  setWeeklyGrvtDistribution              ·          -  ·          -  ·      45877  ·          102  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  transferOwnership                      ·          -  ·          -  ·      28678  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  addWhitelist                           ·      49713  ·      49725  ·      49724  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  approve                                ·      46290  ·      46350  ·      46314  ·            5  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  decreaseAllowance                      ·          -  ·          -  ·      29537  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  emergencyStopMinting                   ·      25909  ·      47821  ·      36865  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  increaseAllowance                      ·          -  ·          -  ·      46571  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  permit                                 ·      74722  ·      74734  ·      74728  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  removeWhitelist                        ·          -  ·          -  ·      25617  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  transfer                               ·      29012  ·      51832  ·      39966  ·           53  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  transferFrom                           ·          -  ·          -  ·      37725  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedBurn                        ·          -  ·          -  ·      34159  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedMint                        ·      34066  ·      68350  ·      52246  ·          129  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedReturnFromPool              ·          -  ·          -  ·      34670  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedSendToPool                  ·          -  ·          -  ·      51736  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester  ·  burn                                   ·          -  ·          -  ·      41058  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester  ·  mint                                   ·          -  ·          -  ·      58164  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  decreaseDebt                           ·          -  ·          -  ·      25877  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  increaseDebt                           ·          -  ·          -  ·      47842  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  setAddresses                           ·     114527  ·     114563  ·     114561  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  mint                                   ·      51208  ·      68368  ·      52357  ·          618  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  setDecimals                            ·          -  ·          -  ·      23794  ·          192  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  transfer                               ·          -  ·          -  ·      51376  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollector                ·  setAddresses                           ·     162404  ·     182784  ·     179145  ·          124  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollector                ·  setRouteToGRVTStaking                  ·          -  ·          -  ·      29980  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  collectFees                            ·      73474  ·      88836  ·      81155  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  decreaseDebt                           ·      54503  ·      95050  ·      73060  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  increaseDebt                           ·      67273  ·     136726  ·      85668  ·           37  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  setAddresses                           ·          -  ·          -  ·     182784  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FunctionCaller              ·  setSortedVesselsAddress                ·      48948  ·      48972  ·      48971  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FunctionCaller              ·  setVesselManagerAddress                ·      66027  ·      66051  ·      66050  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  setAddresses                           ·     275194  ·     275230  ·     275225  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  stake                                  ·     125972  ·     125984  ·     125974  ·           24  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  unpause                                ·          -  ·          -  ·      24929  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  approve                                ·      29205  ·      46617  ·      45291  ·          167  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  decreaseAllowance                      ·          -  ·          -  ·      24638  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  increaseAllowance                      ·          -  ·          -  ·      46664  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  permit                                 ·      74713  ·      74725  ·      74719  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  transfer                               ·          -  ·          -  ·      34360  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  transferFrom                           ·          -  ·          -  ·      37479  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  unprotectedMint                        ·      34084  ·      51172  ·      38450  ·          137  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  unprotectedTransferFrom                ·          -  ·          -  ·      51896  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  addEntityVesting                       ·     141937  ·     176137  ·     161628  ·           33  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  claimGRVTToken                         ·      49935  ·      93959  ·      83678  ·           11  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  lowerEntityVesting                     ·          -  ·          -  ·     100052  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  removeEntityVesting                    ·      42285  ·      87775  ·      67296  ·            8  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  setAddresses                           ·      50990  ·      51014  ·      51013  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  transferOwnership                      ·          -  ·          -  ·      28631  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  transferUnassignedGRVT                 ·      40722  ·      45522  ·      44562  ·            5  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setDecimals                            ·      21747  ·      43659  ·      24729  ·           30  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setLatestRoundId                       ·      26571  ·      43683  ·      40733  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrevPrice                           ·      23664  ·      43600  ·      36350  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrevRoundId                         ·          -  ·          -  ·      26584  ·           25  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrice                               ·      23706  ·      43642  ·      36461  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setUpdateTime                          ·          -  ·          -  ·      43608  ·           24  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  fetchPrice                             ·      44967  ·      88201  ·      56764  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  setAddresses                           ·     114585  ·     114597  ·     114596  ·           20  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  setOracle                              ·      69844  ·     196535  ·     158300  ·           21  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTestnet            ·  setPrice                               ·      22121  ·      44117  ·      34235  ·          593  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVessels               ·  setAddresses                           ·     114638  ·     114662  ·     114660  ·          132  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVesselsTester         ·  insert                                 ·          -  ·          -  ·     127131  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVesselsTester         ·  setSortedVessels                       ·          -  ·          -  ·      43935  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  provideToSP                            ·     177957  ·     292464  ·     216435  ·          245  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  setAddresses                           ·     227927  ·     248091  ·     243678  ·           96  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  withdrawFromSP                         ·     150762  ·     400117  ·     302517  ·           50  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPoolTester         ·  setAddresses                           ·     248067  ·     248091  ·     248084  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManager               ·  setAddresses                           ·     248651  ·     248675  ·     248665  ·           55  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  batchLiquidateVessels                  ·     468164  ·     983251  ·     804851  ·           27  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  liquidate                              ·     359652  ·     793708  ·     510916  ·          181  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  liquidateVessels                       ·     435083  ·    1124367  ·     764091  ·           37  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  redeemCollateral                       ·     378267  ·     944117  ·     526866  ·           44  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  setAddresses                           ·     204872  ·     204908  ·     204900  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setAddresses                           ·     248615  ·     248675  ·     248665  ·           70  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setBaseRate                            ·      22258  ·      44014  ·      30108  ·          247  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setLastFeeOpTimeToNow                  ·      26729  ·      43829  ·      26814  ·          201  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  unprotectedDecayBaseRateFromBorrowing  ·      27299  ·      51366  ·      40933  ·          161  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  Deployments                                                           ·                                         ·  % of limit   ·             │
+·········································································|·············|·············|·············|···············|··············
+|  ActivePool                                                            ·          -  ·          -  ·    1100362  ·        3.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  AdminContract                                                         ·          -  ·          -  ·    2350811  ·        7.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  BorrowerOperations                                                    ·          -  ·          -  ·    3683897  ·       12.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester                                              ·          -  ·          -  ·    3896094  ·         13 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  CollSurplusPool                                                       ·          -  ·          -  ·    1007910  ·        3.4 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester                                               ·          -  ·          -  ·     994621  ·        3.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtToken                                                             ·    1729770  ·    1729806  ·    1729802  ·        5.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtTokenTester                                                       ·    1888423  ·    1888447  ·    1888443  ·        6.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester                                            ·     160392  ·     160416  ·     160414  ·        0.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DefaultPool                                                           ·          -  ·          -  ·     949502  ·        3.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20DecimalsMock                                                     ·          -  ·          -  ·      88078  ·        0.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20Mock                                                             ·          -  ·          -  ·     746863  ·        2.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20Test                                                             ·          -  ·          -  ·     942520  ·        3.1 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FeeCollector                                                          ·          -  ·          -  ·    1580940  ·        5.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FeeCollectorTester                                                    ·          -  ·          -  ·    1582629  ·        5.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FunctionCaller                                                        ·          -  ·          -  ·     293907  ·          1 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GasPool                                                               ·          -  ·          -  ·     227312  ·        0.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GravitaMathTester                                                     ·          -  ·          -  ·     195141  ·        0.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GRVTStaking                                                           ·          -  ·          -  ·    1653494  ·        5.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GRVTTokenTester                                                       ·    1059236  ·    1081136  ·    1059657  ·        3.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  LockedGRVT                                                            ·          -  ·          -  ·     951327  ·        3.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  MockAggregator                                                        ·          -  ·          -  ·     364334  ·        1.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  PriceFeedTester                                                       ·          -  ·          -  ·    1089364  ·        3.6 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  PriceFeedTestnet                                                      ·          -  ·          -  ·     224946  ·        0.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SafetyTransferTester                                                  ·          -  ·          -  ·     257218  ·        0.9 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SortedVessels                                                         ·          -  ·          -  ·    1470651  ·        4.9 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SortedVesselsTester                                                   ·          -  ·          -  ·     250970  ·        0.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  StabilityPool                                                         ·          -  ·          -  ·    3078407  ·       10.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  StabilityPoolTester                                                   ·          -  ·          -  ·    3404842  ·       11.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  Timelock                                                              ·          -  ·          -  ·     726810  ·        2.4 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManager                                                         ·          -  ·          -  ·    3797230  ·       12.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManagerOperations                                               ·          -  ·          -  ·    4549652  ·       15.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManagerTester                                                   ·          -  ·          -  ·    4025194  ·       13.4 %  ·          -  │
+·------------------------------------------------------------------------|-------------|-------------|-------------|---------------|-------------·
+
+
+
+
+
+After testing  this is the result you can observe some gas amount  can be saved by our report .
+
+·------------------------------------------------------------------------|---------------------------|-------------|-----------------------------·
+|                          Solc version: 0.8.19                          ·  Optimizer enabled: true  ·  Runs: 200  ·  Block limit: 30000000 gas  │
+·········································································|···························|·············|······························
+|  Methods                                                                                                                                       │
+·······························|·········································|·············|·············|·············|···············|··············
+|  Contract                    ·  Method                                 ·  Min        ·  Max        ·  Avg        ·  # calls      ·  usd (avg)  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  decreaseDebt                           ·          -  ·          -  ·      25956  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  increaseDebt                           ·          -  ·          -  ·      47881  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ActivePool                  ·  setAddresses                           ·     227391  ·     227427  ·     227420  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  addNewCollateral                       ·     328887  ·     337359  ·     331718  ·          375  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setActive                              ·      46187  ·      46427  ·      46346  ·          375  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setAddresses                           ·     184311  ·     204487  ·     201095  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setBorrowingFee                        ·      28154  ·      50078  ·      31510  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setCCR                                 ·      30129  ·      32929  ·      31996  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setCollateralParameters                ·      57609  ·      66273  ·      63385  ·          306  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMCR                                 ·      30173  ·      32973  ·      32040  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMinNetDebt                          ·      28069  ·      50053  ·      36092  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setMintCap                             ·      27753  ·      30841  ·      29297  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setPercentDivisor                      ·      29993  ·      32793  ·      31860  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setRedemptionBlockTimestamp            ·          -  ·          -  ·      47822  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  AdminContract               ·  setRedemptionFeeFloor                  ·      30142  ·      32954  ·      32013  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  addColl                                ·     242025  ·     371236  ·     324355  ·           16  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  adjustVessel                           ·          -  ·          -  ·     320270  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  claimCollateral                        ·      49860  ·      57537  ·      53153  ·           28  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  closeVessel                            ·     252892  ·     269912  ·     263117  ·           10  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  openVessel                             ·     419196  ·     730344  ·     594526  ·         1062  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  repayDebtTokens                        ·     389472  ·     391129  ·     390301  ·            4  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  setAddresses                           ·     250077  ·     250113  ·     250104  ·           94  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  withdrawColl                           ·     232391  ·     366887  ·     333649  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperations          ·  withdrawDebtTokens                     ·     271623  ·     417385  ·     355172  ·            6  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  addColl                                ·     209949  ·     344214  ·     251732  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  adjustVessel                           ·     223533  ·     391298  ·     317709  ·           27  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  closeVessel                            ·     252892  ·     318124  ·     268505  ·           14  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  openVessel                             ·     419218  ·     743321  ·     615776  ·          435  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  repayDebtTokens                        ·     213254  ·     284717  ·     262513  ·            8  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  setAddresses                           ·     250087  ·     250135  ·     250124  ·           31  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  withdrawColl                           ·     233539  ·     366865  ·     267039  ·            9  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester    ·  withdrawDebtTokens                     ·     278509  ·     391392  ·     332589  ·           12  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CollSurplusPool             ·  setAddresses                           ·     159737  ·     159773  ·     159769  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  addFundToStabilityPool                 ·      52422  ·     106639  ·     105199  ·          113  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  removeFundFromStabilityPool            ·      40330  ·      49930  ·      45130  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  setAddresses                           ·     137235  ·     137259  ·     137255  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  setWeeklyGrvtDistribution              ·          -  ·          -  ·      45877  ·          102  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester     ·  transferOwnership                      ·          -  ·          -  ·      28678  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  addWhitelist                           ·      49713  ·      49725  ·      49724  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  approve                                ·      46290  ·      46350  ·      46314  ·            5  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  decreaseAllowance                      ·          -  ·          -  ·      29537  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  emergencyStopMinting                   ·      25909  ·      47821  ·      36865  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  increaseAllowance                      ·          -  ·          -  ·      46571  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  permit                                 ·      74722  ·      74734  ·      74728  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  removeWhitelist                        ·          -  ·          -  ·      25617  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  transfer                               ·      28970  ·      51790  ·      39924  ·           53  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  transferFrom                           ·          -  ·          -  ·      37683  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedBurn                        ·          -  ·          -  ·      34159  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedMint                        ·      34066  ·      68350  ·      52246  ·          129  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedReturnFromPool              ·          -  ·          -  ·      34670  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenTester             ·  unprotectedSendToPool                  ·          -  ·          -  ·      51736  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester  ·  burn                                   ·          -  ·          -  ·      41058  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester  ·  mint                                   ·          -  ·          -  ·      58164  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  decreaseDebt                           ·          -  ·          -  ·      25877  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  increaseDebt                           ·          -  ·          -  ·      47842  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  DefaultPool                 ·  setAddresses                           ·     114527  ·     114563  ·     114561  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  mint                                   ·      51208  ·      68368  ·      52356  ·          618  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  setDecimals                            ·          -  ·          -  ·      23794  ·          192  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  ERC20Test                   ·  transfer                               ·          -  ·          -  ·      51376  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollector                ·  setAddresses                           ·     162404  ·     182784  ·     179145  ·          124  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollector                ·  setRouteToGRVTStaking                  ·          -  ·          -  ·      29980  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  collectFees                            ·      73406  ·      88758  ·      81082  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  decreaseDebt                           ·      54479  ·      94985  ·      73012  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  increaseDebt                           ·      67225  ·     136696  ·      85624  ·           37  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FeeCollectorTester          ·  setAddresses                           ·          -  ·          -  ·     182784  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FunctionCaller              ·  setSortedVesselsAddress                ·      48948  ·      48972  ·      48971  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  FunctionCaller              ·  setVesselManagerAddress                ·      66027  ·      66051  ·      66050  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  setAddresses                           ·     275194  ·     275230  ·     275225  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  stake                                  ·     125967  ·     125979  ·     125969  ·           24  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTStaking                 ·  unpause                                ·          -  ·          -  ·      24929  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  approve                                ·      29205  ·      46617  ·      45291  ·          167  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  decreaseAllowance                      ·          -  ·          -  ·      24638  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  increaseAllowance                      ·          -  ·          -  ·      46664  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  permit                                 ·      74713  ·      74725  ·      74719  ·            2  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  transfer                               ·          -  ·          -  ·      34360  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  transferFrom                           ·          -  ·          -  ·      37479  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  unprotectedMint                        ·      34084  ·      51172  ·      38450  ·          137  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  GRVTTokenTester             ·  unprotectedTransferFrom                ·          -  ·          -  ·      51896  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  addEntityVesting                       ·     141900  ·     176100  ·     161591  ·           33  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  claimGRVTToken                         ·      49919  ·      93943  ·      83662  ·           11  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  lowerEntityVesting                     ·          -  ·          -  ·     100012  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  removeEntityVesting                    ·      41911  ·      87390  ·      66915  ·            8  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  setAddresses                           ·      50990  ·      51014  ·      51013  ·          104  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  transferOwnership                      ·          -  ·          -  ·      28631  ·            1  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  LockedGRVT                  ·  transferUnassignedGRVT                 ·      40698  ·      45498  ·      44538  ·            5  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setDecimals                            ·      21747  ·      43659  ·      24729  ·           30  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setLatestRoundId                       ·      26571  ·      43683  ·      40733  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrevPrice                           ·      23664  ·      43600  ·      36350  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrevRoundId                         ·          -  ·          -  ·      26584  ·           25  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setPrice                               ·      23706  ·      43642  ·      36461  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  MockAggregator              ·  setUpdateTime                          ·          -  ·          -  ·      43608  ·           24  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  fetchPrice                             ·      44967  ·      88201  ·      56764  ·           41  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  setAddresses                           ·     114585  ·     114597  ·     114596  ·           20  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTester             ·  setOracle                              ·      69844  ·     196535  ·     158300  ·           21  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  PriceFeedTestnet            ·  setPrice                               ·      22121  ·      44117  ·      34235  ·          593  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVessels               ·  setAddresses                           ·     114638  ·     114662  ·     114660  ·          132  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVesselsTester         ·  insert                                 ·          -  ·          -  ·     127121  ·            3  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  SortedVesselsTester         ·  setSortedVessels                       ·          -  ·          -  ·      43935  ·            7  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  provideToSP                            ·     177916  ·     292418  ·     216420  ·          245  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  setAddresses                           ·     227927  ·     248091  ·     243678  ·           96  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPool               ·  withdrawFromSP                         ·     150721  ·     400044  ·     302449  ·           50  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  StabilityPoolTester         ·  setAddresses                           ·     248067  ·     248091  ·     248084  ·           29  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManager               ·  setAddresses                           ·     248651  ·     248675  ·     248665  ·           55  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  batchLiquidateVessels                  ·     468089  ·     983123  ·     804760  ·           27  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  liquidate                              ·     359621  ·     793655  ·     510854  ·          181  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  liquidateVessels                       ·     434976  ·    1124145  ·     763928  ·           37  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  redeemCollateral                       ·     378192  ·     943961  ·     526791  ·           44  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerOperations     ·  setAddresses                           ·     204872  ·     204908  ·     204900  ·          125  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setAddresses                           ·     248615  ·     248675  ·     248665  ·           70  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setBaseRate                            ·      22258  ·      44014  ·      30108  ·          247  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  setLastFeeOpTimeToNow                  ·      26725  ·      43825  ·      26810  ·          201  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  VesselManagerTester         ·  unprotectedDecayBaseRateFromBorrowing  ·      27295  ·      51362  ·      40929  ·          161  ·          -  │
+·······························|·········································|·············|·············|·············|···············|··············
+|  Deployments                                                           ·                                         ·  % of limit   ·             │
+·········································································|·············|·············|·············|···············|··············
+|  ActivePool                                                            ·          -  ·          -  ·    1100362  ·        3.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  AdminContract                                                         ·          -  ·          -  ·    2339654  ·        7.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  BorrowerOperations                                                    ·          -  ·          -  ·    3592351  ·         12 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  BorrowerOperationsTester                                              ·          -  ·          -  ·    3804512  ·       12.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  CollSurplusPool                                                       ·          -  ·          -  ·     998461  ·        3.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  CommunityIssuanceTester                                               ·          -  ·          -  ·    1056234  ·        3.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtToken                                                             ·    1736023  ·    1736059  ·    1736055  ·        5.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtTokenTester                                                       ·    1894924  ·    1894948  ·    1894944  ·        6.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DebtTokenWhitelistedTester                                            ·     160392  ·     160416  ·     160414  ·        0.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  DefaultPool                                                           ·          -  ·          -  ·     949502  ·        3.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20DecimalsMock                                                     ·          -  ·          -  ·      88078  ·        0.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20Mock                                                             ·          -  ·          -  ·     746863  ·        2.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  ERC20Test                                                             ·          -  ·          -  ·     942520  ·        3.1 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FeeCollector                                                          ·          -  ·          -  ·    1588122  ·        5.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FeeCollectorTester                                                    ·          -  ·          -  ·    1588506  ·        5.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  FunctionCaller                                                        ·          -  ·          -  ·     293907  ·          1 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GasPool                                                               ·          -  ·          -  ·     227312  ·        0.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GravitaMathTester                                                     ·          -  ·          -  ·     195141  ·        0.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GRVTStaking                                                           ·          -  ·          -  ·    1701196  ·        5.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  GRVTTokenTester                                                       ·    1059236  ·    1081136  ·    1059657  ·        3.5 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  LockedGRVT                                                            ·          -  ·          -  ·     964508  ·        3.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  MockAggregator                                                        ·          -  ·          -  ·     364334  ·        1.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  PriceFeedTester                                                       ·          -  ·          -  ·    1089364  ·        3.6 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  PriceFeedTestnet                                                      ·          -  ·          -  ·     224946  ·        0.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SafetyTransferTester                                                  ·          -  ·          -  ·     257218  ·        0.9 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SortedVessels                                                         ·          -  ·          -  ·    1459302  ·        4.9 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  SortedVesselsTester                                                   ·          -  ·          -  ·     250970  ·        0.8 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  StabilityPool                                                         ·          -  ·          -  ·    3049340  ·       10.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  StabilityPoolTester                                                   ·          -  ·          -  ·    3378162  ·       11.3 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  Timelock                                                              ·          -  ·          -  ·     720365  ·        2.4 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManager                                                         ·          -  ·          -  ·    3796018  ·       12.7 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManagerOperations                                               ·          -  ·          -  ·    4559633  ·       15.2 %  ·          -  │
+·········································································|·············|·············|·············|···············|··············
+|  VesselManagerTester                                                   ·          -  ·          -  ·    4022026  ·       13.4 %  ·          -  │
+·------------------------------------------------------------------------|-------------|-------------|-------------|---------------|-------------·
+
+
+
+
+ **Analytics according to hardhat:-**
+
+ Before AdminContract               ·  setAddresses                           ·     184335  ·     204511  ·     201119
+ AFter  AdminContract               ·  setAddresses                           ·     184311  ·     204487  ·     201095
+ 
+ Before AdminContract               ·  setCollateralParameters                ·      57633  ·      66297  ·      63409  ·
+ After  AdminContract               ·  setCollateralParameters                ·      57609  ·      66273  ·      63385 
+ 
+ Before  BorrowerOperations          ·  addColl                                ·     242151  ·     371423  ·     324522 
+ After   BorrowerOperations          ·  addColl                                ·     242025  ·     371236  ·     324355
+ 
+ Before  BorrowerOperations          ·  adjustVessel                           ·          -  ·          -  ·     320461 
+ After   BorrowerOperations          ·  adjustVessel                           ·          -  ·          -  ·     320271  
+ 
+ Before  BorrowerOperations          ·  closeVessel                            ·     252927  ·     269947  ·     263152
+ After   BorrowerOperations          ·  closeVessel                            ·     252892  ·     269912  ·     263117
+ 
+ 
+ Total  function call savings
+
+   AdminContract               ·  setAddresses                  Min        ·  Max        ·  Avg        
+                    						 24           24            24 
+   
+   AdminContract               ·  setCollateralParameters        24           24            24
+   
+   BorrowerOperations          ·  addColl                       126	     187           167
+   
+   BorrowerOperations          ·  closeVessel                   35          35             35
+   
+
+    
+    Above gas saves per call of functions .
+    
+    
+ 
+ Deployment Gas savings
+ 
+   Before AdminContract                                                         ·          -  ·          -  ·    2350811  ·        
+   After  AdminContract                                                         ·          -  ·          -  ·    2339654  ·        
+   
+   Before BorrowerOperations                                                    ·          -  ·          -  ·    3683897 
+   After  BorrowerOperations                                                    ·          -  ·          -  ·    3592351
+   
+   Before  BorrowerOperationsTester                                              ·          -  ·          -  ·    3896094 
+   After   BorrowerOperationsTester                                              ·          -  ·          -  ·    3804512
+   
+   Before  SortedVessels                                                         ·          -  ·          -  ·    1470651
+   After   SortedVessels                                                         ·          -  ·          -  ·    1459302
+   
+   Before  StabilityPool                                                         ·          -  ·          -  ·    3078407  
+   After   StabilityPool                                                         ·          -  ·          -  ·    3049340 
+   
+   Before   CollSurplusPool                                                       ·          -  ·          -  ·    1007910 
+   After   CollSurplusPool                                                       ·          -  ·          -  ·     998461
+   
+   Before  StabilityPoolTester                                                   ·          -  ·          -  ·    3404842
+   After   StabilityPoolTester                                                   ·          -  ·          -  ·    3378162 
+   
+   Before  Timelock                                                              ·          -  ·          -  ·     726810 
+   After   Timelock                                                              ·          -  ·          -  ·     720365
+   
+   Before  VesselManager                                                         ·          -  ·          -  ·    3797230 
+   After   VesselManager                                                         ·          -  ·          -  ·    3796018 
+   
+   Before  VesselManagerTester                                                   ·          -  ·          -  ·    4025194
+   After   VesselManagerTester                                                   ·          -  ·          -  ·    4022026  
+
+
+    
+  Total deployment gas savings .
+  
+  AdminContract  = 11157
+  BorrowerOperations  = 91546
+  BorrowerOperationsTester  = 91582
+  SortedVessels = 11349
+  StabilityPoll = 29067
+  CollSurplusPool = 9449
+  StabilityPoolTester  = 26680
+   Timelock  = 6445
+   VesselManger = 1212
+   VesselManagerTester = 3168
+   
+  
+  
+  
+  
+    
+    
+Same analytics shows big gas differnce in remix IDE.
+
+
+   			 
+Analytics According to REMIX ID :-
+
+
+---------------------------------------
+AdminContract.sol
+
+**Before**
+
+gas	             4934515 gas
+transaction cost     4290882 gas 
+execution cost	     3942414 gas 
+
+**After**
+gas	             2689839 gas
+transaction cost     2338990 gas 
+execution cost	     2120170 gas 
+
+
+Total savings 
+gas	             
+transaction cost     
+execution cost	
+
+
+----------------------------------
+BorrowerOperation.sol
+
+**Before**
+gas	             6647427 gas
+transaction cost     5780371 gas 
+execution cost	     5325795 gas 
+
+**After**
+
+gas	             4130022 gas
+transaction cost     3591323 gas 
+execution cost	     3281043 gas
+
+Total savings 
+gas	             2517405 gas       
+transaction cost     2189048 gas
+execution cost	     2044753 gas
+
+-----------------------------------
+CollSurplusPool.sol
+
+**Before**
+gas	            2258372 gas
+transaction cost    1963801 gas 
+execution cost	    1779269 gas 
+
+**After**
+gas	            2248883 gas
+transaction cost    1955550 gas 
+execution cost	    1771662 gas 
+
+Total savings 
+gas	            9489 gas 
+transaction cost    8251 gas
+execution cost	    7607 gas
+----------------------------------
+
+
+StabilityPool.sol
+
+**Before**
+gas	           6324309 gas
+transaction cost   5499399 gas 
+execution cost	   5063019 gas
+
+**After**
+gas	           3505741 gas
+transaction cost   3048470 gas 
+execution cost	   2777622 gas
+
+Total savings 
+gas	           2818568 gas  
+transaction cost   2450929 gas
+execution cost	   2285397 gas
+
+
+--------------------------------
+VesselManagerOperation.sol
+
+**Before**
+gas	          7950850 gas
+transaction cost  6913782 gas 
+execution cost	  6371354 gas 
+
+**After**
+
+gas	          7950836 gas
+transaction cost  6913770 gas 
+execution cost	  6371354 gas
+
+Total savings 
+gas	          14 gas       
+transaction cost  12 gas
+execution cost	  0 
+
+--------------------------------
+
+VesselManager is abtract
+
+
+
+
+
+
+
+
+
+
